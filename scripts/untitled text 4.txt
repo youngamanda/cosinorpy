@@ -1,0 +1,11 @@
+from CosinorPy import file_parser, cosinor, cosinor1
+import numpy as np
+import pandas as pd
+import os
+
+df = file_parser.read_csv(os.path.join("data","example.txt"))
+tests = df.test.unique()
+df2 = df[df['test'].isin(tests[:20])] # only for 20 genes
+file_parser.export(df2,os.path.join("results","example.csv"))
+
+r = cosinor.fit_group(df2, n_components=1)
